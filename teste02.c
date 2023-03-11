@@ -42,15 +42,28 @@ int main() {
 	mostrar(texto, stopwords);
     removerStopWords(texto, stopwords);
     eliminar(texto);
-	mostrar(texto, stopwords);
-
+    preencherSemRepetir(texto, sumario);
+	//mostrar(texto, stopwords);
+    
     //preencherSemRepetir(texto, sumario);
-
-    /*printf("====================================\n");
+    printf("\n\n\nTexto sem repeticoes:\n");
     int i;
+
     for(i = 0; i < tamanho; i++){
-     	printf("%s ", sumario[i].palavra);
-    }*/
+        if(strcmp(texto[i].palavra, "") != 0){
+     	    printf("%s ", texto[i].palavra);
+        }
+    }
+
+
+    printf("\n\n\nSumario:\n");
+    for(i = 0; i < tamanho; i++){
+        if(strcmp(sumario[i].palavra, "") != 0){
+     	    printf("%s ", sumario[i].palavra);
+        }
+    }
+
+    printf("\n\n");
 
     
     return 0;
@@ -94,12 +107,22 @@ void stw(Stopwords *stopwords){
 
 void mostrar(Texto *texto, Stopwords *stopwords){
     int i;
-    for(i = 1; i < tamanho; i++){
-     	printf("%s ", texto[i].palavra);
+
+    printf("Palavras:\n");
+    for(i = 0; i < tamanho; i++){
+        if(strcmp(texto[i].palavra, "") != 0){
+     	    printf("%s ", texto[i].palavra);
+        }
     }
-    for(i = 1; i < tamanho2; i++){
-     	printf("%s ", stopwords[i].plv);
+
+    printf("\n\nStopwords:\n");
+    for(i = 0; i < tamanho2; i++){
+        if(strcmp(stopwords[i].plv, "") != 0){
+     	    printf("%s ", stopwords[i].plv);
+        }
     }
+
+    printf("\n\n");
 }
 
 void removerStopWords(Texto *texto, Stopwords *stopwords){
@@ -110,9 +133,10 @@ void removerStopWords(Texto *texto, Stopwords *stopwords){
             if(strcmp(texto[i].palavra, stopwords[j].plv) == 0){
                 strcpy(texto[i].palavra, "");
             }
-            
         }
     }
+
+    
 }
 
 void preencherSemRepetir(Texto *texto, Sumario *sumario){
@@ -120,18 +144,26 @@ void preencherSemRepetir(Texto *texto, Sumario *sumario){
 
     //strcpy(sumario[0].palavra,texto[0].palavra);
 
-    for(i = 1; i < tamanho; i++){
+    for(i = 0; i < tamanho; i++){
         for(j = 0; j < i; j++){
             if(strcmp(texto[j].palavra, texto[i].palavra) == 0){
-                strcpy(sumario[j].palavra, "");
-            } 
+                strcpy(texto[j].palavra, "");
+            }
         }
     }
 
+    int l = 0;
 
-    for(i = 0; i < j; i++){
-        strcpy(sumario[i].palavra, texto[i].palavra);
+    for(j = 0; j < tamanho; j++){
+        if(strcmp(texto[j].palavra, "") != 0){
+            strcpy(sumario[l].palavra, texto[j].palavra);
+            l++;
+        } 
     }
+
+    /*for(i = 0; i < j; i++){
+        strcpy(sumario[i].palavra, texto[i].palavra);
+    }*/
 }
 
 
@@ -151,18 +183,11 @@ void token(Texto *texto, Sumario *sumario){
 }
 
 void eliminar(Texto *texto){
-    int i = 0, l = 0;
+    int i;
 
-    while(texto[i].palavra[l] != '\0'){
-        if(texto[i].palavra[l] == '\0'){
-            i++;
-            l = 0;
+    for(i = 0; i < tamanho; i++){
+        if(texto[i].palavra == ',' || texto[i].palavra == '.'){
+            strcpy(texto[i].palavra, "");
         }
-
-        if(texto[i].palavra[l] == ',' || texto[i].palavra[l] == '.'){
-            strcpy(texto[i].palavra[l], "");
-        }
-
-        l++;
     }
 }
