@@ -7,7 +7,7 @@
 int tamanho = 0;
 int tamanho2 = 0;
 
-int arq = 0, org = 0, suma = 0;
+int arq = 0, org = 0, suma = 0, quantPalavras = 4;
 
 typedef struct{
     int quantidade;    
@@ -40,7 +40,7 @@ void token(Texto *texto, Sumario *sumario);
 void eliminar(Texto *texto);
 void copiar(Texto *texto, Origem *origem);
 void comparacao(Sumario *sumario, Origem *origem);
-void ordenar(Sumario *sumario);
+void ordenar(Sumario *sumario); 
 
 int main() {
 
@@ -49,13 +49,13 @@ int main() {
     stw(stopwords);
 	mostrar(texto, stopwords);
     copiar(texto, origem);
-    removerStopWords(texto, stopwords);
+    removerStopWords(texto, stopwords);   
     eliminar(texto);
     preencherSemRepetir(texto, sumario);
     comparacao(sumario, origem);
 	
     printf("\n\n\nTexto sem repeticoes:\n");
-    int i;
+    int i;   
 
     for(i = 0; i < tamanho; i++){
         if(strcmp(texto[i].palavra, "") != 0){
@@ -76,7 +76,7 @@ int main() {
     ordenar(sumario);
 
     printf("Ordenado pela quantidade:\n");
-    for(i = 0; i < tamanho; i++){
+    for(i = 0; i < quantPalavras; i++){
         if(strcmp(sumario[i].palavra, "") != 0){
      	    printf("%s %d\n", sumario[i].palavra, sumario[i].quantidade);
         }
@@ -87,7 +87,7 @@ int main() {
 
 void preencher(Texto *texto){
     FILE *file;
-    file = fopen("testetrab2.txt","r");
+    file = fopen("ingles.txt","r");
 
     if(file){
 
@@ -98,7 +98,7 @@ void preencher(Texto *texto){
         }
 
         fclose(file);
-    } else{
+    } else{     
         printf("Arquivo nao encontrado!\n");
     }
 }
@@ -151,8 +151,6 @@ void removerStopWords(Texto *texto, Stopwords *stopwords){
             }
         }
     }
-
-    
 }
 
 void preencherSemRepetir(Texto *texto, Sumario *sumario){
