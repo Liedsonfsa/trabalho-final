@@ -7,7 +7,7 @@
 int tamanho = 0;
 int tamanho2 = 0;
 
-int arq = 0;
+int arq = 0, org = 0, suma = 0;
 
 typedef struct{
     int quantidade;    
@@ -22,9 +22,14 @@ typedef struct{
     char plv[50];
 } Stopwords;
 
+typedef struct{
+    char palavra[50];
+} Origem;
+
 Sumario sumario[MAX];
 Texto texto[MAX];
 Stopwords stopwords[MAX];
+Origem origem[MAX];
 
 void preencher(Texto *texto);
 void stw(Stopwords *stopwords);
@@ -33,6 +38,9 @@ void removerStopWords(Texto *texto, Stopwords *stopwords);
 void preencherSemRepetir(Texto *texto, Sumario *sumario);
 void token(Texto *texto, Sumario *sumario);
 void eliminar(Texto *texto);
+void copiar(Texto *texto, Origem *origem);
+void comparacao(Sumario *sumario, Origem *origem);
+void ordenar(Sumario *sumario);
 
 int main() {
 
@@ -40,12 +48,12 @@ int main() {
     preencher(texto);
     stw(stopwords);
 	mostrar(texto, stopwords);
+    copiar(texto, origem);
     removerStopWords(texto, stopwords);
     eliminar(texto);
     preencherSemRepetir(texto, sumario);
-	//mostrar(texto, stopwords);
-    
-    //preencherSemRepetir(texto, sumario);
+    comparacao(sumario, origem);
+	
     printf("\n\n\nTexto sem repeticoes:\n");
     int i;
 
@@ -59,12 +67,20 @@ int main() {
     printf("\n\n\nSumario:\n");
     for(i = 0; i < tamanho; i++){
         if(strcmp(sumario[i].palavra, "") != 0){
-     	    printf("%s ", sumario[i].palavra);
+     	    printf("%s %d\n", sumario[i].palavra, sumario[i].quantidade);
         }
     }
 
     printf("\n\n");
 
+    ordenar(sumario);
+
+    printf("Ordenado pela quantidade:\n");
+    for(i = 0; i < tamanho; i++){
+        if(strcmp(sumario[i].palavra, "") != 0){
+     	    printf("%s %d\n", sumario[i].palavra, sumario[i].quantidade);
+        }
+    }
     
     return 0;
 }
@@ -142,8 +158,6 @@ void removerStopWords(Texto *texto, Stopwords *stopwords){
 void preencherSemRepetir(Texto *texto, Sumario *sumario){
     int i, j;
 
-    //strcpy(sumario[0].palavra,texto[0].palavra);
-
     for(i = 0; i < tamanho; i++){
         for(j = 0; j < i; j++){
             if(strcmp(texto[j].palavra, texto[i].palavra) == 0){
@@ -152,18 +166,15 @@ void preencherSemRepetir(Texto *texto, Sumario *sumario){
         }
     }
 
-    int l = 0;
+    //int l = 0;
 
     for(j = 0; j < tamanho; j++){
         if(strcmp(texto[j].palavra, "") != 0){
-            strcpy(sumario[l].palavra, texto[j].palavra);
-            l++;
+            strcpy(sumario[suma].palavra, texto[j].palavra);
+            sumario[suma].quantidade = 0;
+            suma++;
         } 
     }
-
-    /*for(i = 0; i < j; i++){
-        strcpy(sumario[i].palavra, texto[i].palavra);
-    }*/
 }
 
 
@@ -191,3 +202,46 @@ void eliminar(Texto *texto){
         }
     }
 }
+
+void comparacao(Sumario *sumario, Origem *origem){
+    int i, j;
+
+    for(i = 0; i < suma; i++){
+        for(j = 0; j < tamanho; j++){
+            if(strcmp(sumario[i].palavra, origem[j].palavra) == 0){
+                sumario[i].quantidade++;
+            }
+        }
+    }
+}
+
+void copiar(Texto *texto, Origem *origem){
+    int i;
+
+    for(i = 0; i < tamanho; i++){
+        strcpy(origem[i].palavra, texto[i].palavra);
+    }
+}
+
+void ordenar(Sumario *sumario){
+    int i, j;
+    int quant;
+    char auxPalavra[50];
+
+    for(i = 1; i < tamanho; i++){
+        quant = sumario[i].quantidade;
+        strcpy(auxPalavra, sumario[i].palavra);
+
+        j = i - 1;
+        while((j >= 0) && quant > sumario[j].quantidade){
+            sumario[j + 1].quantidade = sumario[j].quantidade;
+            strcpy(sumario[j + 1].palavra, sumario[j].palavra);
+
+            j--;
+        }
+
+        sumario[j + 1].quantidade = quant;
+        strcpy(sumario[j + 1].palavra, auxPalavra);
+    }
+}
+
