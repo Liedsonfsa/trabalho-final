@@ -1,0 +1,6 @@
+tempo   9
+tem   3
+pro   2
+perguntou   1
+quanto   1
+respondeu   1

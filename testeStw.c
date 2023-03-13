@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#define ARQUIVO "saida.txt"
 #define MAX 1000
 
 int tamanho = 0;
@@ -39,7 +39,8 @@ void preencherSemRepetir(Texto *texto, Sumario *sumario);
 void eliminar(Texto *texto);
 void copiar(Texto *texto, Origem *origem);
 void comparacao(Sumario *sumario, Origem *origem);
-void ordenar(Sumario *sumario); 
+void ordenar(Sumario *sumario);
+void salvar(Sumario *sumario); 
 
 int main() {
 
@@ -75,12 +76,12 @@ int main() {
     ordenar(sumario);
 
     printf("Ordenado pela quantidade:\n");
-    for(i = 0; i < quantPalavras; i++){
+    for(i = 0; i < suma; i++){
         if(strcmp(sumario[i].palavra, "") != 0){
      	    printf("%s\t\t%d\n", sumario[i].palavra, sumario[i].quantidade);
         }
     }
-    
+    salvar(sumario);
     return 0;
 }
 
@@ -245,3 +246,25 @@ void ordenar(Sumario *sumario){
     }
 }
 
+void salvar(Sumario *sumario){
+	int i, qtd;
+
+	printf("Qantidade de palavras: ");
+	scanf("%d", &qtd);
+
+	FILE *file = fopen (ARQUIVO, "w");
+
+    i = 0;
+	while ( qtd--) {
+
+        if(sumario[i].quantidade == 0){
+            break;
+        } else{
+            fprintf(file, "%s   %d\n", sumario[i].palavra, sumario[i].quantidade);	 
+        }
+
+        i++;  
+
+    }
+    fclose(file);
+}

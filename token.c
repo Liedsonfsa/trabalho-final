@@ -86,7 +86,7 @@ int main() {
 
 void preencher(Texto *texto){
     FILE *file;
-    file = fopen("testetrab2.txt","r");
+    file = fopen("teste02.txt","r");
 
     if(file){
 
@@ -145,7 +145,7 @@ void removerStopWords(Texto *texto, Stopwords *stopwords){
 
     for(i = 0; i < MAX; i++){
         for(j = 0; j < MAX; j++){
-            if(strcmp(texto[i].palavra, stopwords[j].plv) == 0){
+            if(strcasecmp(texto[i].palavra, stopwords[j].plv) == 0){
                 strcpy(texto[i].palavra, "");
             }
         }
@@ -157,15 +157,15 @@ void preencherSemRepetir(Texto *texto, Sumario *sumario){
 
     for(i = 0; i < tamanho; i++){
         for(j = 0; j < i; j++){
-            if(strcmp(texto[j].palavra, texto[i].palavra) == 0){
+            if(strcasecmp(texto[j].palavra, texto[i].palavra) == 0){
                 strcpy(texto[j].palavra, "");
             }
         }
     }
 
-
+                    
     for(j = 0; j < tamanho; j++){
-        if(strcmp(texto[j].palavra, "") != 0){
+        if(strcasecmp(texto[j].palavra, "") != 0){
             strcpy(sumario[suma].palavra, texto[j].palavra);
             sumario[suma].quantidade = 0;
             suma++;
@@ -187,7 +187,7 @@ void eliminar(Texto *texto){
         int ver = 0;
 
         while(aux[l] != '\0'){
-            if(aux[l] == ',' || aux[l] == '.' || aux[l] == '?' || aux[l]  == '!'){
+            if(aux[l] == ',' || aux[l] == '.' || aux[l] == '?' || aux[l]  == '!' || aux[l] == ';' || aux[l] == ':'){
                 ver = 1;
             }
 
@@ -208,7 +208,7 @@ void comparacao(Sumario *sumario, Origem *origem){
 
     for(i = 0; i < suma; i++){
         for(j = 0; j < tamanho; j++){
-            if(strcmp(sumario[i].palavra, origem[j].palavra) == 0){
+            if(strcasecmp(sumario[i].palavra, origem[j].palavra) == 0){
                 sumario[i].quantidade++;
             }
         }
