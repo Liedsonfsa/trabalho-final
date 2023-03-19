@@ -1,0 +1,6 @@
+North   6
+are   4
+Korea   4
+has   4
+U.S   3
+weapons   3

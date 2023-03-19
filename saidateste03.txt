@@ -1,0 +1,10 @@
+One   4
+ring   3
+Dark   2
+all   2
+them   2
+Land   2
+Mordor   2
+where   2
+shadows   2
+lie   2

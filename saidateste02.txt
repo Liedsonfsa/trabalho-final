@@ -1,0 +1,8 @@
+Anel   3
+Escuro   2
+terra   2
+Mordor   2
+onde   2
+Sombras   2
+deitam   2
+Tres   1
