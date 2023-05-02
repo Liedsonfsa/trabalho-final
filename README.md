@@ -8,9 +8,9 @@ Colocar em prática os conhecimentos aprendidos ao longo da disciplina.
 Ser capaz de ler um arquivo de texto, remover as spotwords do texto e fazer um sumário das palavras que mais aparecem.
 
 # Especificações do Programa
-O programa deve ser executado via `PowerShell`. <br>
-Serão passados os caminhos onde estão os arquivos de texto, stopwords e o de saída. <br>
-Serão passados também a escolha do arquivo de texto (HTML ou txt) e a quantidade de palavras a serem gravadas no arquivo de saída;
+O programa deve ser executado via `PowerShell`; <br>
+Serão passados os caminhos onde estão os arquivos de texto, stopwords e o de saída; <br>
+Serão passados também a escolha do arquivo (HTML ou txt) e a quantidade de palavras a serem gravadas no arquivo de saída.
 
 # Para compilar
   vá até a barra de pesquisa da sua máquina e pesquise por `PowerShell`
