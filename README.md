@@ -43,11 +43,7 @@ xxxx.exe 2 C:\Users\fabri\Algoritmos2\trabalho-final\output\textoingles.txt 2 C:
  A parte da criação do executável poderia ser feita de outra forma, mas essa foi a que eu escolhi. 
 
 # Conclusão e Agradecimentos
- O trabalho foi desenvolvido em conjunto com mais dois colegas. A maior parte do código foi desenvolvida por mim, sendo assim, eles ficaram responsáveis por escrever a documentação do programa. Além da documentação, também ouve uma apresentação para explicar sobre o código. <br> 
+O trabalho foi desenvolvido em conjunto com mais dois colegas. A maior parte do código foi desenvolvida por mim, sendo assim, eles ficaram responsáveis por escrever a documentação do programa. <br>Além da documentação, também ouve uma apresentação para explicar sobre o código. <br> 
  Caso esse repositório tenha sido útil a você, considere deixar uma estrela, e se caso sugir alguma dúvida sobre o desenvolvimento ou sobre alguma funcionalidade, fique a vontade para me perguntar sobre.
+
  
- 
-
-
-
-
